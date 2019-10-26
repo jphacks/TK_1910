@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { User } from 'libs/db/models/user.model';
 
@@ -16,6 +16,7 @@ export class AuthService {
     }
 
     async validateUser(payload): Promise<any> {
+        if (!payload) { throw new HttpException('もう一度ログインしてください', 401); }
         return await this.userModel.findById(payload.userid);
     }
 }

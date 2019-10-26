@@ -21,9 +21,9 @@ export class AuthController {
     @Post('login')
     async Auth(@Body() userLoginDto: UserLoginDto) {
         const user = await this.userModel.findOne({ username: userLoginDto.username }).select('+password');
-        if (!user) { throw new HttpException('ユーザが見つかりませんでした', 401); }
+        if (!user) { throw new HttpException('ユーザが見つかりませんでした', 403); }
         const isValid = await require('bcrypt').compareSync(userLoginDto.password, user.password);
-        if (!isValid) { throw new HttpException('パスワードが正しくありません', 401); }
+        if (!isValid) { throw new HttpException('パスワードが正しくありません', 403); }
         const accessToken = await this.authService.signIn(user._id);
         return {
             data: {
