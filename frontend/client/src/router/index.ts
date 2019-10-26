@@ -8,12 +8,16 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    children: [
+      { path: '/order/detail', component: () => import('../components/OrderView.vue') },
+      { path: '/order/:id', component: () => import('../components/OrderView.vue') },
+    ]
   }
 ]
 
 const router = new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
