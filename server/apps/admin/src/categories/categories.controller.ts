@@ -5,7 +5,7 @@ import { InjectModel } from 'nestjs-typegoose';
 import { Category } from 'libs/db/models/category.model';
 
 @Crud({ model:　Category })
-@Controller('categories')
+@Controller('admin/categories')
 @ApiUseTags('カテゴリー')
 export class CategoriesController {
     constructor(@InjectModel(Category) private readonly model) { }

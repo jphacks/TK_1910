@@ -5,7 +5,7 @@ import { InjectModel } from 'nestjs-typegoose';
 import { Order } from 'libs/db/models/order.model';
 
 @Crud({ model: Order })
-@Controller('orders')
+@Controller('admin/orders')
 @ApiUseTags('注文')
 export class OrdersController {
     constructor(@InjectModel(Order) private readonly model) { }

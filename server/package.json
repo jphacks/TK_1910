@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./apps/server/test/jest-e2e.json"
   },
   "dependencies": {
+    "@aws-sdk/types": "^0.1.0-preview.1",
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.7.2",
     "@nestjs/platform-express": "^6.7.2",
@@ -27,10 +28,15 @@
     "@typegoose/typegoose": "^6.0.4",
     "@types/bcrypt": "^3.0.0",
     "@types/mongoose": "^5.5.23",
+    "@types/multer-s3": "^2.7.7",
+    "aws-sdk": "^2.556.0",
     "bcrypt": "^3.0.6",
+    "dotenv": "^8.2.0",
     "mongoose": "^5.7.7",
+    "multer-s3": "^2.9.0",
     "nestjs-mongoose-crud": "^1.1.4",
     "nestjs-typegoose": "^7.0.0",
+    "npm": "^6.12.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3",
