@@ -12,7 +12,7 @@ const models = TypegooseModule.forFeature([User, Category, Menu, Order, Table]);
 @Global()
 @Module({
   imports: [
-    TypegooseModule.forRoot('mongodb://localhost/smart-order', {
+    TypegooseModule.forRoot('mongodb://localhost/popcorn-db', {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
