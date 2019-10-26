@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="text-align: left; margin-bottom: 10px;">
-      <a-button type="primary" @click="$router.push('/table/add')">新規追加</a-button>
+      <a-button type="primary" @click="$router.push('/user/add')">新規追加</a-button>
     </div>
     <a-table :columns="columns" :dataSource="data.data" :loading="loading">
       <template slot="action" slot-scope="data">
@@ -9,10 +9,10 @@
           slot="action"
           style="margin-right: 10px;"
           type="primary"
-          @click="$router.push('/table/'+data._id)"
+          @click="$router.push('/user/'+data._id)"
         >編集</a-button>
         <a-popconfirm
-          title="このテーブルを削除しますか"
+          title="このユーザを削除しますか"
           @confirm="confirm(data._id)"
           okText="はい"
           cancelText="いいえ"
@@ -26,8 +26,8 @@
 <script>
 const columns = [
   {
-    title: "テーブル",
-    dataIndex: "table",
+    title: "ユーザ",
+    dataIndex: "username",
   },
   {
     title: "操作",
@@ -52,16 +52,16 @@ export default {
   methods: {
     async confirm(id) {
       this.loading = true;
-      await this.$http.delete("/admin/tables/"+id).then(res => {
+      await this.$http.delete("/admin/users/"+id).then(res => {
         this.loading = false;
         this.data = res.data;
-        this.$message.success('テーブルを削除しました');
+        this.$message.success('ユーザを削除しました');
         this.fetch();
       });
     },
     async fetch(params = {}) {
       this.loading = true;
-      await this.$http.get("/admin/tables").then(res => {
+      await this.$http.get("/admin/users").then(res => {
         this.loading = false;
         this.data = res.data;
       });

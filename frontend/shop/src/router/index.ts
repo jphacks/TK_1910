@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
   {
     path: '/',
     name: 'main',
@@ -19,6 +25,9 @@ const routes = [
       { path: '/menu', component: () => import('../components/Menu/List.vue') },
       { path: '/menu/add', component: () => import('../components/Menu/Edit.vue') },
       { path: '/menu/:id', component: () => import('../components/Menu/Edit.vue') },
+      { path: '/user', component: () => import('../components/User/List.vue') },
+      { path: '/user/add', component: () => import('../components/User/Edit.vue') },
+      { path: '/user/:id', component: () => import('../components/User/Edit.vue') },
     ]
   }
 ]
