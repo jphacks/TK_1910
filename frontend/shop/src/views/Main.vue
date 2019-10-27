@@ -8,7 +8,6 @@
         :defaultSelectedKeys="['2']"
         :style="{ lineHeight: '64px' }"
       >
-        <a-menu-item key="1">ホーム</a-menu-item>
       </a-menu>
     </a-layout-header>
     <a-layout>

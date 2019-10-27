@@ -17,6 +17,8 @@ export class Order {
     @ApiModelProperty({ description: '注文状態' })
     @prop()
     status: number;　// status: 支払状態 0:支払待ち 1:支払キャンセル 2:支払完了
+    @prop({ default: false })
+    done: boolean;　// done: true: 渡し完了 false: 渡し待ち
     @prop()
     @ApiModelProperty({ description: '注文詳細' })
     detail: [{
