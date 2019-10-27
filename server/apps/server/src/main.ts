@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
+import * as serveStatic from 'serve-static';
+import { join } from 'path';
+import express = require('express');
 
 async function bootstrap() {
   dotenv.config();
@@ -17,6 +20,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
   app.enableCors();
+  app.use('/', express.static('/Users/shuangbinghe/Downloads/TK_1910/server/public'));
   await app.listen(3000);
 }
 bootstrap();

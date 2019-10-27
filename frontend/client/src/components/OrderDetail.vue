@@ -7,13 +7,17 @@
           <p class="desc">注文内容を確認し支払いをしてください</p>
         </div>
         <md-detail-item title="注文内容" />
-        <md-detail-item v-for="item in data.detail" :key="item.menu" :title="item.menu.title+ ' ¥' + item.menu.price +' x'+item.amount">&yen;{{item.menu.price * item.amount}}</md-detail-item>
+        <md-detail-item
+          v-for="item in data.detail"
+          :key="item.menu"
+          :title="item.menu.title+ ' ¥' + item.menu.price +' x'+item.amount"
+        >&yen;{{item.menu.price * item.amount}}</md-detail-item>
         <md-detail-item title="合計金額">&yen;{{this.data.amount}}</md-detail-item>
         <div class="footer-slot" slot="footer">
           <md-field title="支払方法" class="radio-field">
             <md-radio-list v-model="payment" :options="payments" icon-size="lg" />
           </md-field>
-          <md-button type="primary" round>支払う</md-button>
+          <md-button type="primary" v-on:click="$router.push('/payment/' + id)" round>支払う</md-button>
         </div>
       </md-bill>
     </div>
@@ -37,7 +41,7 @@ export default {
   },
   methods: {
     async fetch() {
-        await this.$http
+      await this.$http
         .get("/server/order/detail/" + this.id)
         .then(res => {
           this.data = res.data;

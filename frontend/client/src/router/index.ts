@@ -12,6 +12,7 @@ const routes = [
     children: [
       { path: '/order/detail/:id', component: () => import('../components/OrderDetail.vue') },
       { path: '/order/:id', component: () => import('../components/OrderView.vue') },
+      { path: '/payment/:id', component: () => import('../components/PaymentView.vue') },
     ]
   }
 ]

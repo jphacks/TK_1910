@@ -77,5 +77,14 @@ export class OrderController {
         return order;
     }
 
-
+    @Get('payment/:id')
+    @ApiOperation({ title: '注文情報を読みとる' })
+    async payment(@Param('id') orderID: string) {
+        const order = await this.orderModel.findById(orderID).populate({
+            path: 'detail.menu',
+            model: 'Menu',
+        });
+        if (!order) { throw new HttpException('注文が見つかりませんでした', 405); }
+        return order;
+    }
 }

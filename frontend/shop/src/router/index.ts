@@ -28,6 +28,8 @@ const routes = [
       { path: '/user', component: () => import('../components/User/List.vue') },
       { path: '/user/add', component: () => import('../components/User/Edit.vue') },
       { path: '/user/:id', component: () => import('../components/User/Edit.vue') },
+      { path: '/order', component: () => import('../components/Order/List.vue') },
+      { path: '/order/:id', component: () => import('../components/Order/List.vue') },
     ]
   }
 ]
