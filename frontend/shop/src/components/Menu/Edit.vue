@@ -63,9 +63,7 @@
         mode="multiple"
         placeholder="アレルギー源を選択してください"
       >
-        <a-select-option value="prok">豚肉</a-select-option>
-        <a-select-option value="chicken">鶏肉</a-select-option>
-        <a-select-option value="lamp">羊肉</a-select-option>
+        <a-select-option v-for="allergie in allergies" :key="allergie.value" :value="allergie.value">{{allergie.title}}</a-select-option>
       </a-select>
     </a-form-item>
     <a-form-item :wrapper-col="{ span: 12, offset: 6 }">
@@ -93,6 +91,7 @@ export default {
       id: null,
       data: [],
       categories: [],
+      allergies: [],
       formItemLayout: {
         labelCol: { span: 6 },
         wrapperCol: { span: 14 }
@@ -101,6 +100,10 @@ export default {
   },
   methods: {
     async fetch() {
+      await this.$http.get("/admin/menus/allergies").then(res => {
+        this.allergies = res.data
+      })
+      console.log(this.allergies)
       await this.$http.get("/admin/categories").then(res => {
         this.categories = res.data.data;
       });

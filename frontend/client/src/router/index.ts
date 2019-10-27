@@ -10,14 +10,14 @@ const routes = [
     name: 'home',
     component: Home,
     children: [
-      { path: '/order/detail', component: () => import('../components/OrderView.vue') },
+      { path: '/order/detail/:id', component: () => import('../components/OrderDetail.vue') },
       { path: '/order/:id', component: () => import('../components/OrderView.vue') },
     ]
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

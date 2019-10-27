@@ -12,6 +12,7 @@ async function bootstrap() {
     .setTitle('Popcorn Order API')
     .setDescription('Popcorn Order API Docs.')
     .setVersion('1.0')
+    .addBearerAuth('Authorization', 'header', 'apiKey')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);

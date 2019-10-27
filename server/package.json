@@ -31,6 +31,7 @@
     "@types/bcrypt": "^3.0.0",
     "@types/mongoose": "^5.5.23",
     "@types/multer-s3": "^2.7.7",
+    "async": "^3.1.0",
     "aws-sdk": "^2.556.0",
     "bcrypt": "^3.0.6",
     "class-transformer": "^0.2.3",

@@ -2,6 +2,7 @@ import { prop, Ref } from '@typegoose/typegoose';
 import { Menu } from './menu.model';
 import { Table } from './table.model';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { Schema } from 'mongoose';
 
 export class Order {
     @ApiModelProperty({ description: 'テーブルID' })

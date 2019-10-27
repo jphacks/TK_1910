@@ -9,7 +9,11 @@
     >
       アレルギーや宗教上で食事制限のある食材があれば選んでください
       <md-check-group v-model="allergies" class="allergie-check-group">
-        <md-check-box v-for="allergie in data.allergies" :key="allergie.value" :name="allergie.value">{{allergie.title}}</md-check-box>
+        <md-check-box
+          v-for="option in data.allergies"
+          :key="option.value"
+          :name="option.value"
+        >{{option.title}}</md-check-box>
       </md-check-group>
     </md-dialog>
     <md-button
@@ -81,6 +85,7 @@
           <p style="font-size: 0.7rem; margin-top: 5px;">￥{{item.price}}</p>
           <a>
             <md-tag
+              v-if="checkAllergies(item.allergies) > 0"
               size="small"
               type="ghost"
               style="font-size: 0.7rem; margin-top: 5px;"
@@ -105,6 +110,11 @@ export default {
     [Switch.name]: Switch
   },
   mounted() {
+    if (localStorage.getItem("Allergies")) {
+      this.allergies = JSON.parse(localStorage.getItem("Allergies"));
+    } else {
+      this.allergies = [];
+    }
     this.id = this.$route.params.id;
     this.fetch();
   },
@@ -120,6 +130,19 @@ export default {
         return total;
       }
     },
+    async setAllergies() {
+      localStorage.setItem("Allergies", JSON.stringify(this.allergies));
+      this.AllergieDialog.open = false;
+    },
+    checkAllergies(allergies_array) {
+      const allergies_temp = [];
+      this.allergies.forEach(i => {
+        if (allergies_array.indexOf(i) > -1) {
+          allergies_temp.push(i);
+        }
+      });
+      return allergies_temp.length;
+    },
     async confirmOrder() {
       var order = [];
       this.data.menu.forEach(element => {
@@ -130,11 +153,10 @@ export default {
           });
         }
       });
-
       await this.$http
-        .post("/client/order/" + this.id, { detail: order })
+        .post("/server/order/" + this.id, { detail: order, amount: this.totalPrice() })
         .then(res => {
-          console.log(res);
+          this.$router.push('detail/' + res.data._id);
         });
     },
     async category_filter(item, index, prevIndex) {
@@ -201,7 +223,7 @@ export default {
           {
             text: "登録",
             type: "danger",
-            handler: this.onActConfirm
+            handler: this.setAllergies
           },
           {
             text: "スキップ",
